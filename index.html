@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Days Since</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .purple-text {
+            color: #8a2be2; 
+        }
+    </style>
+</head>
+<body class="bg-gray-200 h-screen flex items-center justify-center">
+    <div class="bg-white p-6 rounded shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Hitung Jumlah Hari</h1>
+        <form id="dateForm" class="flex flex-col">
+            <label for="tglAwal" class="mb-2">Tanggal Awal:</label>
+            <input type="date" id="tglAwal" class="border p-2 rounded mb-4">
+            <button type="button" onclick="hitungJumlahHari()" class="bg-purple-400 text-white py-2 rounded">Hitung Hari</button>
+        </form>
+        <div id="hasilHitung" class="mt-4"></div>
+        <p class="text-sm text-purple-500 mt-2 text-right"> by <a target="_blank" href="https:/github.com/fesloth">Syahla Nur Azizah</a></p>
+    </div>
+    
+    <script>
+        function hitungJumlahHari() {
+            const tglAwal = document.getElementById('tglAwal').value;
+            const tglSetAwal = new Date(tglAwal);
+            const tglSekarang = new Date();
+            const selisihWaktu = Math.floor(
+                (tglSekarang - tglSetAwal) / (1000 * 60 * 60 * 24),
+            );
+
+            const formatTglAwal = tglSetAwal.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year:"numeric",
+            });
+
+            const formatTglSekarang = tglSekarang.toLocaleDateString('id-ID', {
+                day:"numeric",
+                month: "long",
+                year:"numeric",
+            });
+
+            const hasilHitung = `Sejak tanggal ${formatTglAwal} <br> jumlah hari berlalu <br> <span class="purple-text">${selisihWaktu} hari</span>. <br> ${formatTglAwal} - ${formatTglSekarang}, `;
+
+            document.getElementById('hasilHitung').innerHTML = hasilHitung;
+        }
+    </script>
+</body>
+</html>
